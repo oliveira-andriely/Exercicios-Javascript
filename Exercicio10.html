@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Exercicio 10 -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mover Imagem com Teclas de Setas</title>
+    <style>
+
+        #imagem {
+            position: absolute;
+            top: 200px;
+            left: 200px;
+            width: 100px;
+            height: 100px;
+            border: 16px solid red;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var imagem = document.getElementById('imagem');
+            var topPos = 200;
+            var leftPos = 200;
+
+            document.addEventListener('keydown', function(event) {
+                var key = event.key;
+
+                switch (key) {
+                    case 'ArrowUp':
+                        topPos -= 10;
+                        break;
+                    case 'ArrowDown':
+                        topPos += 10;
+                        break;
+                    case 'ArrowLeft':
+                        leftPos -= 10;
+                        break;
+                    case 'ArrowRight':
+                        leftPos += 10;
+                        break;
+                }
+
+                imagem.style.top = topPos + 'px';
+                imagem.style.left = leftPos + 'px';
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Mover Imagem com Teclas de Setas</h1>
+    <div id="imagem"></div>
+</body>
+</html>
