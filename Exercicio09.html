@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identidade table</title>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+
+        th, td{
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr{
+            background-color: cornflowerblue;
+        }
+
+        h1{
+            text-align: center;
+            font-size: 48px;
+        }
+
+        button{
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            background-color: cornflowerblue;
+            color: white;
+            cursor: pointer;
+            margin-left: 640px;
+
+        }
+
+        button:hover{
+            background-color: #f2f2f2;
+            color: cornflowerblue;
+            transition: .4s;
+            margin-top: 10px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Idade das pessoas</h1>
+    <button type="button" onclick="calcularIdade()">Dados pessoais</button>
+    <div id="tabelaPessoas"></div>
+</body>
+<script>
+    function calcularIdade() {
+        var pessoas = [];
+        var pessoa;
+        
+        do {
+            var nome = prompt("Digite o nome da pessoa:");
+            var dataNascimento = prompt("Digite a data de nascimento (DD/MM/AAAA) da pessoa:");
+            
+            var partesData = dataNascimento.split("/");
+            var dia = parseInt(partesData[0]);
+            var mes = parseInt(partesData[1]);
+            var ano = parseInt(partesData[2]);
+
+            var dataAtual = new Date();
+            var anoAtual = dataAtual.getFullYear();
+            var mesAtual = dataAtual.getMonth() + 1;
+            var diaAtual = dataAtual.getDate();
+
+            var idade;
+
+            if (mesAtual > mes || (mesAtual === mes && diaAtual >= dia)) {
+                idade = anoAtual - ano;
+                
+            }else {
+                idade = anoAtual - ano - 1;
+            }
+
+            pessoa = {
+                nome: nome,
+                idade: idade
+            };
+
+            pessoas.push(pessoa);
+
+            var continuar = confirm("Deseja continuar informando dados pessoais?")
+
+        } while (continuar);
+
+            var pessoaMaisVelha = pessoas[0];
+            var pessoaMaisNova = pessoas[0];
+
+            for(var i = 1; i < pessoas.length; i++){
+                if(pessoas[i].idade > pessoaMaisVelha.idade){
+                    pessoaMaisVelha = pessoas[i];
+                }
+
+                if(pessoas[i].idade < pessoaMaisNova.idade){
+                    pessoaMaisNova = pessoas[i]
+                }
+            }
+
+            var tabela = "<table>";
+            tabela += "<tr><th>Nome</th><th>Idade</th></tr>";
+        }
+
+        for (var i = 0; i < pessoas.length; i++){
+            var pessoa = pessoas[i];
+
+            tabela += "<tr>";
+            tabela += "<td>" + pessoa.nome + "</td>"
+            tabela += "<td>" + pessoa.idade + " anos</td>"
+            tabela += "</tr>"
+            
+        }
+
+        tabela += "<tr><th>Pessoa mais velha</th><th>" + pessoaMaisVelha.nome + " (" + pessoaMaisVelha.idade +  "anos)</th></tr>";
+        tabela += "<tr><th>Pessoa mais nova</th><th>" + pessoaMaisNova.nome + "(" + pessoaMaisNova.idade +   "anos)</th></tr>";
+
+        tabela += "</table>";
+
+        document.getElementById("tabelaPessoas").innerHTML = tabela;
+    
+</script>
+</html>
