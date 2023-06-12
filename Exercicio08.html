@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!--Exercicio 8-->
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de alunos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td{
+            padding: 8px;
+            text-align: left;
+        }
+
+        th{
+            background-color: #f2f2f2;
+        }
+
+        td{
+            text-transform: capitalize;
+        }
+
+        .reprovado{
+            background-color: red;
+            color: #f2f2f2;
+        }
+
+        .aprovado{
+            background-color: green;
+            color: #f2f2f2;
+        }
+
+        h1{
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: underline;
+        }
+
+        p{
+            text-align: center;
+            font-size: 24px;
+            
+        }
+
+        body{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+        }
+
+        button{
+            font-size: 24px;
+            text-align: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #4CAF50;
+            border: none;
+            padding: 16px 32px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition-duration: 0.4s;
+            margin-left: 640px;
+
+        }
+
+        button:hover{
+            background-color: #4CAF50;
+            color: white;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela de alunos</h1>
+    <p>Este e o sistema de notas on-line. <br/> Para continuar, aperte no botao a baixo e siga as instruçoes</p>
+    <button type="button" onclick="criarTabela()">Criar Tabela</button>
+    <div id="tabelaAlunos"></div>
+</body>
+<script>
+    function formatarNome(nome) {
+        return nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase(); 
+    }
+    function criarTabela() {
+        var alunos = []
+        var aluno;
+
+        do{
+            var nome = prompt("Digite o nome do aluno")
+            var notaSemestre1 = parseFloat(prompt("Digite a nota do primeiro semestre:"));
+            var notaSemestre2 = parseFloat(prompt("Digite a nota do segundo semesttre:"));
+            var frequencia = parseFloat(prompt("Digite a frequencia do aluno (em %):"));
+
+            aluno = {
+                nome: formatarNome(nome),
+                notaSemestre1: notaSemestre1.toFixed(2),
+                notaSemestre2: notaSemestre2.toFixed(2),
+                frequencia: frequencia.toFixed(2),
+            };
+
+            alunos.push(aluno);
+
+            var continuar = confirm("Deseja continuar informando dados dos alunos?")
+        } while(continuar);
+
+        var tabela = "<table>";
+            tabela += "<tr><th>Nome</th><th>Nota 1º Semestre </th><th>Nota 2º Semestre </th><th>Frequencia (%)</th></tr>";
+
+            for (var i = 0; i < alunos.length; i++){
+                var aluno = alunos[i];
+                var media = (parseFloat(aluno.notaSemestre1) + parseFloat(aluno.notaSemestre2)) / 2;
+
+                tabela += "<tr";
+                tabela += media >= 6 && aluno.frequencia >= 75 ? " class='aprovado'" : " class='reprovado'";
+                tabela += ">";
+                tabela += "<td>" + aluno.nome + "</td>"
+                tabela += "<td>" + aluno.notaSemestre1 + "</td>";
+                tabela += "<td>" + aluno.notaSemestre2 + "</td>";
+                tabela += "<td>" + aluno.frequencia + "</td>";
+                tabela += "</tr>";
+            }
+
+            tabela += "</table>"
+
+            document.getElementById('tabelaAlunos').innerHTML = tabela;
+            
+    }
+</script>
+</html>
