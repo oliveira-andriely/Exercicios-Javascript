@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de percentual</title>
+    <style>
+        body{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+        }
+
+        form{
+            font-size: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            color: gray;
+            font-weight: bold;
+            gap: 0.5em;
+            
+        }
+
+        button{
+            padding: 8px;
+            width: 100px;
+            font: 1em sans-serif;   
+            color: white;
+            background-color: gray;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: black;
+            transition: .4s;
+        }
+
+        input{
+            padding: 10px;
+            outline: none;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            }
+
+            p{
+                font-size: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                text-align: center;
+                color: rgb(0, 0, 0);
+                font-weight: bold;
+                
+            }
+
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Percentuais</h1>
+    <form>
+        <label for="numEleitores">Número de eleitores:</label>
+        <input type="number" id="numEleitores"><br>
+
+        <label for="numVotosBrancos">Número de votos brancos:</label>
+        <input type="number" id="numVotosBrancos"><br>
+
+        <label for="numVotosNulos">Número de votos nulos:</label>
+        <input type="number" id="numVotosNulos"><br>
+
+        <label for="numVotosValidos">Número de votos válidos:</label>
+        <input type="number" id="numVotosValidos"><br>
+
+        <button type="button" onclick="calcularPercentuais()">Calcular</button>
+    </form>
+
+    <h2>Resultados:</h2>
+    <p id="resultadoBrancos"></p>
+    <p id="resultadoNulos"></p>
+    <p id="resultadoValidos"></p
+    
+</body>
+<script>
+        function calcularPercentuais() {
+            // Obtendo os valores dos campos do formulário
+            var numEleitores = parseInt(document.getElementById("numEleitores").value);
+            var numVotosBrancos = parseInt(document.getElementById("numVotosBrancos").value);
+            var numVotosNulos = parseInt(document.getElementById("numVotosNulos").value);
+            var numVotosValidos = parseInt(document.getElementById("numVotosValidos").value);
+
+            // Calculando os percentuais
+            var percentualBrancos = (numVotosBrancos / numEleitores) * 100;
+            var percentualNulos = (numVotosNulos / numEleitores) * 100;
+            var percentualValidos = (numVotosValidos / numEleitores) * 100;
+
+            // Exibindo os resultados no HTML
+            document.getElementById("resultadoBrancos").innerHTML = "Percentual de votos brancos: " + percentualBrancos.toFixed(2) + "%";
+            document.getElementById("resultadoNulos").innerHTML = "Percentual de votos nulos: " + percentualNulos.toFixed(2) + "%";
+            document.getElementById("resultadoValidos").innerHTML = "Percentual de votos válidos: " + percentualValidos.toFixed(2) + "%";
+        }
+    </script>
+</html>
